@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <p>{{ title }}</p>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id" @click="increment">
-        {{ todo.id }} - {{ todo.content }}
-      </li>
-    </ul>
-    <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
-    <p>Active: {{ active ? 'yes' : 'no' }}</p>
-    <p>Clicks on todos: {{ clickCount }}</p>
+  <div class="column">
+    <div class="row">
+      <v-for>
+        <q-card class="question bg-teal-3">
+          <q-card-section>
+            <div class="text-black text-center text-h2 text-weight-bold">100</div>
+          </q-card-section>
+        </q-card>
+      </v-for>
+
+    </div>
   </div>
 </template>
 
@@ -21,7 +22,7 @@ import {
   toRef,
   Ref,
 } from 'vue';
-import { Todo, Meta } from './models';
+import { QuestionCard } from './models';
 
 function useClickCount() {
   const clickCount = ref(0);
@@ -57,8 +58,14 @@ export default defineComponent({
       type: Boolean
     }
   },
-  setup (props) {
+  setup(props) {
     return { ...useClickCount(), ...useDisplayTodo(toRef(props, 'todos')) };
   },
 });
 </script>
+
+<style lang="sass" scoped>
+.question
+  width: 150%
+  max-width: 400px
+</style>

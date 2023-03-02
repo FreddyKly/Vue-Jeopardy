@@ -1,8 +1,5 @@
-export interface Todo {
+export interface QuestionCard {
   id: number;
-  content: string;
-}
-
-export interface Meta {
-  totalCount: number;
+  points: number;
+  question: string;
 }
