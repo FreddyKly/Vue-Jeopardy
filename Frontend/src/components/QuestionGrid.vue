@@ -1,12 +1,12 @@
 <template>
   <div v-for="category in categories" :key=category.id class="column no-wrap">
-    <div class="row flex justify-center text-uppercase text-h4">
+    <div class="row my-font flex justify-center text-capitalized text-h4">
       {{ category.title }}
     </div>
     <div v-for="question in category.questions" :key="question.id" class="row no-wrap">
         <q-card class="question bg-teal-3 q-ma-sm" v-bind:style="$q.screen.gt.md ? {'width' : '270px'} : {'width' : '200px'}">
           <q-card-section>
-            <div class="text-black text-center text-h1 text-weight-bold">
+            <div class="text-black text-center text-h1 my-font text-weight-bold">
               {{ question.points }}
             </div>
           </q-card-section>
