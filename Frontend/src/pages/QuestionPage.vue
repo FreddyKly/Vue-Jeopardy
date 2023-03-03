@@ -1,8 +1,7 @@
 <template>
-    <q-page class="flex justify-center items-center">
-        <q-btn class="my-font bg-teal-3" v-on:click="$router.push('/Grid')" icon="add" label="New Game"/>
+    <q-page class="row items-center justify-center">
+      question
     </q-page>
-    
   </template>
   
   <script lang="ts">
