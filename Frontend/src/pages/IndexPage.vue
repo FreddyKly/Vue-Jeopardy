@@ -1,49 +1,39 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+    <questions-grid
+      title="QuestionGrid"
+      :questions="questions"
+    ></questions-grid>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
+import { QuestionCard } from 'components/models';
+import QuestionsGrid from 'src/components/QuestionGrid.vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'IndexPage',
-  components: { ExampleComponent },
+  components: { QuestionsGrid },
   setup () {
-    const todos = ref<Todo[]>([
+    const questions = ref<QuestionCard[]>([
       {
         id: 1,
-        content: 'ctasas1'
+        points: 100,
+        question: 'Who is the best'
       },
       {
         id: 2,
-        content: 'ct2'
+        points: 200,
+        question: 'Who is the best'
       },
       {
         id: 3,
-        content: 'ct3'
+        points: 300,
+        question: 'Who is the best'
       },
-      {
-        id: 4,
-        content: 'ct4'
-      },
-      {
-        id: 5,
-        content: 'ct5'
-      }
     ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
-    });
-    return { todos, meta };
+    return { questions };
   }
 });
 </script>
