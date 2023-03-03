@@ -10,11 +10,13 @@ const routes: RouteRecordRaw[] = [
     path: '/Grid',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/GridPage.vue') }],
+    meta: { transition: 'slide' }
   },
   {
     path: '/Grid/:Qid',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/QuestionPage.vue') }],
+    meta: { transition: 'slide' }
   },
 
   // Always leave this as last one,
