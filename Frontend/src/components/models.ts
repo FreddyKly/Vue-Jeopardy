@@ -3,3 +3,9 @@ export interface QuestionCard {
   points: number;
   question: string;
 }
+
+export interface Category {
+  id: number;
+  title: string;
+  questions: QuestionCard[];
+}
