@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title class="my-font">
           Jeopardy
         </q-toolbar-title>
       </q-toolbar>
