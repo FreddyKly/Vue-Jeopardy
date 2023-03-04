@@ -23,7 +23,7 @@
     <q-page-container>
       <router-view v-slot="{ Component, route }">
         <!-- Use any custom transition and  to `fade` -->
-        <transition :name="route.meta.transition || 'fade'">
+        <transition :name="route.meta.transition || 'fade'" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
