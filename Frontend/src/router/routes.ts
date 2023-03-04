@@ -16,7 +16,8 @@ const routes: RouteRecordRaw[] = [
     path: '/Grid/:Qid',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/QuestionPage.vue') }],
-    meta: { transition: 'slide' }
+    meta: { transition: 'slide' },
+    props: { QuestionCard: true}
   },
 
   // Always leave this as last one,

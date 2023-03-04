@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { QuestionCard, Category } from 'components/models';
-import QuestionsGrid from 'src/components/QuestionGrid.vue';
+import QuestionsGrid from 'src/components/Grid.vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({

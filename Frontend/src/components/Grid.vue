@@ -42,9 +42,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="sass" scoped>
-// .question
-//   width: 300px
-//   max-width: 300px
-// </style>

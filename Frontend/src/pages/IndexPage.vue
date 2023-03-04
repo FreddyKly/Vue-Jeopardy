@@ -6,9 +6,7 @@
   </template>
   
   <script lang="ts">
-  import { QuestionCard, Category } from 'components/models';
-  import QuestionsGrid from 'src/components/QuestionGrid.vue';
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent } from 'vue';
   
   export default defineComponent({
     name: 'QuestionPage',

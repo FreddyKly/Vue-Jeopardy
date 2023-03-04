@@ -1,18 +1,20 @@
 <template>
-    <q-page class="row items-center justify-center">
-      question
+    <q-page class="row my-font bg-teal-3 border">
+      <Question :question="title"></Question>
     </q-page>
   </template>
   
   <script lang="ts">
-  import { QuestionCard, Category } from 'components/models';
-  import QuestionsGrid from 'src/components/QuestionGrid.vue';
-  import { defineComponent, ref } from 'vue';
+  import { QuestionCard } from 'components/models';
+  import Question from 'src/components/Question.vue';
+  import { defineComponent } from 'vue';
   
   export default defineComponent({
     name: 'QuestionPage',
+    components: {Question},
     setup () {
-      return {  };
+        const title = 'Best Ninja in Konoha'
+      return { title };
     }
   });
   </script>
