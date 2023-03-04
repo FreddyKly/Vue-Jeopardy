@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-page class="row items-center justify-center">
+    <q-page class="row items-start justify-center">
     <questions-grid
       title="QuestionGrid"
       :categories="categories"

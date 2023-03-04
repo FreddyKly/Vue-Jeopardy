@@ -1,6 +1,6 @@
 <template>
     <q-page class="flex justify-center items-center">
-        <q-btn class="my-font bg-teal-3" v-on:click="$router.push('/Grid')" icon="add" label="New Game"/>
+        <q-btn class="my-font bg-teal-3" v-on:click="$router.push('/Grid')" icon="add" label="New Game" text-color="black"/>
     </q-page>
     
   </template>

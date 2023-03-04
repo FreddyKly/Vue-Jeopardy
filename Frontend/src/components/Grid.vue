@@ -1,11 +1,12 @@
 <template>
   <div v-for="category in categories" :key=category.id class="column no-wrap">
     <div class="row my-font flex justify-center text-capitalized text-h4">
-      {{ category.title }}
+      <!-- {{ category.title }} -->
+      <q-input borderless type="textarea" autogrow v-model="category.title" :input-style="{ fontSize: '35px', width: '270px', lineHeight: '35px'}"/>
     </div>
     <div v-for="question in category.questions" :key="question.id" class="row no-wrap">
         <q-card 
-        class="question bg-teal-3 q-ma-sm cursor-pointer" 
+        class="bg-teal-3 q-ma-sm cursor-pointer" 
         v-bind:style="$q.screen.gt.md ? {'width' : '270px'} : {'width' : '200px'}"
         v-on:click="$router.push({path: `/Grid/${question.id}`, replace: false})">
           <q-card-section>
@@ -13,6 +14,9 @@
               {{ question.points }}
             </div>
           </q-card-section>
+          <q-popup-proxy context-menu>
+            <q-btn color="grey" icon="comments_disabled" label="Disable"/>
+          </q-popup-proxy>
         </q-card>
     </div>
   </div>
