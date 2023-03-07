@@ -1,8 +1,10 @@
 <template>
   <div v-for="category in categories" :key=category.id class="column no-wrap">
     <div class="row my-font flex justify-center text-capitalized text-h4">
-      <!-- {{ category.title }} -->
-      <q-input borderless type="textarea" autogrow v-model="category.title" :input-style="{ fontSize: '35px', width: '270px', lineHeight: '35px'}"/>
+      <div style="height: 100px;" class="flex items-center text-center justify-center">
+        <q-input borderless type="textarea" autogrow v-model="category.title" :input-style="{ fontSize: '35px', width: '200px', lineHeight: '35px', textAlign:'center'}"/>
+      </div>
+      
     </div>
     <div v-for="question in category.questions" :key="question.id" class="row no-wrap">
         <q-card 
