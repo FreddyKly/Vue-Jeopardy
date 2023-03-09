@@ -1,8 +1,11 @@
 const express = require("express");
+const mongoose = require('mongoose')
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+
+mongoose.connect("mongodb+srv://freddykly:RatDetector@cluster0.4wp40qf.mongodb.net/Jeopardy")
 
 var corsOptions = {
   origin: "http://localhost:9000"

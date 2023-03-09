@@ -1,9 +1,22 @@
-const mongoose = require('mongoose')
-const game = require("./Schemas/Game")
-const user = require("./Schemas/User")
-const question = require("./Schemas/Questions")
+const express = require('express');
+const mongoose = require("mongoose")
 
-mongoose.connect("mongodb+srv://freddykly:RatDetector@cluster0.4wp40qf.mongodb.net/Jeopardy")
+const gameModel = require("./Schemas/Game")
+const userModel = require("./Schemas/User")
+const questionModel = require("./Schemas/Questions")
+
+const router = express.Router();
+
+router.post('/', async (req, res) => {
+    console.log('Post-Request for Question')
+    const game = mongoose.findById(req.body.gameID)
+    game.
+})
+
+router.post('/category', async (req, res) => {
+    console.log('Post-Request for Category')
+    req.body.gameID
+})
 
 fetch()
 async function test() {
