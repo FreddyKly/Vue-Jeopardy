@@ -1,34 +1,32 @@
-const mongoose = require('mongoose')
-const game = require("./Schemas/Game")
-const user = require("./Schemas/User")
-const question = require("./Schemas/Questions")
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-mongoose.connect("mongodb+srv://freddykly:RatDetector@cluster0.4wp40qf.mongodb.net/Jeopardy")
+const app = express();
 
-fetch()
-async function test() {
-    const q1 = await question.create({
-        topic: "Anime",
-        questions: ["Anime about Ninjas", "Whats the best Anime"]
-    })
-    const q2 = await question.create({
-        topic: "Soccer",
-        questions: ["Who is the best soccer player", "Whats the worst club"]
-    })
-    const user1 = await user.create({
-        name: "CubeHT"
-    })
-    const game1 = await game.create({
-        questions: [q1, q2],
-        creator: user1
-    })
-}
+var corsOptions = {
+  origin: "http://localhost:9000"
+};
 
-async function fetch() {
-    try {
-        const game2 = await game.findById("640750086b4a58abdfb6412d")
-        console.log(game2)
-    } catch (error) {
-        console.log(error.messsage)
-    }
-}
+// Middleware - Has to be placed infront of the routes
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(express.json({limit: "10mb", extended: true}))
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
+
+const user = require('./API/userAPI');
+const questions = require('./API/questionAPI');
+const game = require('./API/gameAPI');
+
+app.use('/api/user', user);
+app.use('/api/questions', questions);
+app.use('/api/game', game);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
