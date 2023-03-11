@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const { Schema } = mongoose;
 
 const gameSchema = new mongoose.Schema({
-    questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+    questions: [{ type: Schema.Types.ObjectId, ref: 'QuestionColumn' }],
     creator: {type: Schema.Types.ObjectId, ref: 'User'},
     createdAt: Date,
 })

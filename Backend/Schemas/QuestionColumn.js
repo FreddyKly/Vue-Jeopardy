@@ -1,15 +1,15 @@
 const mongoose = require("mongoose")
 
-const questionSchema = new mongoose.Schema({
+const questionColumnSchema = new mongoose.Schema({
     topic: {
         type: String,
         minLength: 1,
         required: true
     },
-    questions: {
-        type: [String],
-        required: true
-    },
+    questions: [{
+        question: String,
+        gridID: Number
+    }],
     answeres: {
         type: [String]
     },
@@ -24,4 +24,4 @@ const questionSchema = new mongoose.Schema({
     }, 
 })
 
-module.exports = mongoose.model("Question", questionSchema)
+module.exports = mongoose.model("QuestionColumn", questionColumnSchema)
