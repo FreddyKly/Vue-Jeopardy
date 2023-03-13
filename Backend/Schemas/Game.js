@@ -13,6 +13,11 @@ const gameSchema = new mongoose.Schema({
         type: Date,
         default: () => Date.now()
     },
+    expireAt: { 
+        type: Date, 
+        expires: 60 * 60 * 24, 
+        default: () => Date.now() 
+    }
 })
 
 module.exports = mongoose.model("Game", gameSchema)
