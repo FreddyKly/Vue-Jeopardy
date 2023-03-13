@@ -8,12 +8,12 @@ const questionColumnModel = require("../Schemas/QuestionColumn")
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    console.log('Post-Request for a Game')
+    console.log('Post-Request for a Game', req.body)
     const NUMBER_OF_TOPICS = 5
     const NUMBER_OF_QUESTIONS = 5
     const EXAMPLE_TOPICS = ["Anime", "Best Songs", "Landmarks", "LoL", "Films"]
     
-    const user = await  userModel.create({name: req.body.user})
+    const user = await createUserIfNotExists(req)
     var questionColumnsIDs = []
 
     for (let topicIndex = 0; topicIndex < NUMBER_OF_TOPICS; topicIndex++) {
@@ -28,7 +28,6 @@ router.post('/', async (req, res) => {
 
         await questionColumn.save()
             .then(savedQuestionColumn => {
-                console.log('Hello', savedQuestionColumn._id)
                 questionColumnsIDs.push(savedQuestionColumn._id)
             })
             .catch(err => handleError(err))
@@ -50,5 +49,15 @@ router.get('/', async (req, res) => {
     })
     game.questions.push(q1)
 })
+
+async function createUserIfNotExists(req) {
+    let foundUser = await userModel.findOne({ name: req.body.user })
+    if (foundUser) {
+        return foundUser
+    } else {
+        return await userModel.create({name: req.body.user})
+    }
+    
+}
 
 module.exports = router;
