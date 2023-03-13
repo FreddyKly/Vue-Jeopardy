@@ -16,16 +16,12 @@ const questionColumnSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         immutable: true,
-        default: () => Date.now()
+        default: () => Date.now(),
+        index: { expires: '1m' }
     }, 
     updatedAt: {
         type: Date,
         default: () => Date.now()
-    }, 
-    expireAt: { 
-        type: Date, 
-        expires: '1m', 
-        default: () => Date.now() 
     }
 })
 
