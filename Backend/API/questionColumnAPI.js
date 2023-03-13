@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require("mongoose")
 
-const gameModel = require("./Schemas/Game")
-const userModel = require("./Schemas/User")
-const questionColumnModel = require("./Schemas/QuestionColumn")
+const gameModel = require("../Schemas/Game")
+const userModel = require("../Schemas/User")
+const questionColumnModel = require("../Schemas/QuestionColumn")
 
 const router = express.Router();
 
@@ -16,3 +16,5 @@ router.post('/', async (req, res) => {
     })
     game.questions.push(q1)
 })
+
+module.exports = router;
