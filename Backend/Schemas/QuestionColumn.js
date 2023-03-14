@@ -17,7 +17,7 @@ const questionColumnSchema = new mongoose.Schema({
         type: Date,
         immutable: true,
         default: () => Date.now(),
-        index: { expires: '1m' }
+        index: { expires: '1440m' }
     }, 
     updatedAt: {
         type: Date,

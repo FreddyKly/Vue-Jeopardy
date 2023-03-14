@@ -14,8 +14,14 @@ import { useRouter } from 'vue-router';
     name: 'QuestionPage',
     setup () {
       const router = useRouter()
-      function newGame() {
-        api.post('api/game')
+      async function newGame() {
+        const userJson = JSON.stringify({ user: 'LinitGaws' });
+        const res = await api.post('/api/game', userJson, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log(res)
         router.push('/Grid')
       }
       return { newGame: newGame };
