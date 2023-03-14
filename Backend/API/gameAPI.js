@@ -44,14 +44,23 @@ router.post('/', async (req, res) => {
 // Get Game data
 router.get('/', async (req, res) => {
     console.log('Get-Request for Game')
+    // Game-ID not valid
+    if (!mongoose.Types.ObjectId.isValid(req.body.gameID)){
+        res.status(404).send('The game-ID you entered was not valid')
+        return
+    }
     console.log(req.body.gameID)
     const game = await gameModel.findById(req.body.gameID)
+    // Game-ID not found
+    if (game === null) {
+        res.status(404).send('The game-ID you wanted to access did not correspond to a game in the database')
+        return
+    }
     var categories = {};
     for (let i = 0; i < game.questions.length; i++) {
         topicObject = await questionColumnModel.findById(game.questions[i])
         categories[topicObject.topic] = topicObject.questions
     }
-    console.log(categories)
     res.status(200).json({
         gameID: game._id,
         categories: categories
