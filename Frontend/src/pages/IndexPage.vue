@@ -6,7 +6,8 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { api } from 'src/boot/axios';
+import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
   
   export default defineComponent({
@@ -14,7 +15,7 @@ import { useRouter } from 'vue-router';
     setup () {
       const router = useRouter()
       function newGame() {
-        console.log('hey')
+        api.post('api/game')
         router.push('/Grid')
       }
       return { newGame: newGame };
