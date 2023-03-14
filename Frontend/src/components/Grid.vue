@@ -10,7 +10,7 @@
         <q-card 
         class="bg-teal-3 q-ma-sm cursor-pointer" 
         v-bind:style="$q.screen.gt.md ? {'width' : '270px'} : {'width' : '200px'}"
-        v-on:click="$router.push({path: `/Grid/${question.id}`, replace: false})">
+        v-on:click="$router.push({path: `/${$route.params.GridID}/${question.id}`, replace: false})">
           <q-card-section>
             <div class="text-black text-center text-h1 my-font text-weight-bold">
               {{ question.points }}

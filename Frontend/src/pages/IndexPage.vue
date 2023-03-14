@@ -21,8 +21,8 @@ import { useRouter } from 'vue-router';
             'Content-Type': 'application/json'
           }
         });
-        console.log(res)
-        router.push('/Grid')
+        console.log(res.data.gameID)
+        router.push(`${res.data.gameID}`)
       }
       return { newGame: newGame };
     }

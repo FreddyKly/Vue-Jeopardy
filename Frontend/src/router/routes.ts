@@ -7,13 +7,13 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('src/pages/IndexPage.vue') }],
   },
   {
-    path: '/Grid',
+    path: '/:GridID',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/GridPage.vue') }],
     meta: { transition: 'fade' }
   },
   {
-    path: '/Grid/:Qid',
+    path: '/:GridID/:Qid',
     component: () => import('layouts/MainLayout.vue'),
     children: [{ path: '', component: () => import('pages/QuestionPage.vue') }],
     meta: { transition: 'slide' },
