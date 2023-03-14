@@ -7,8 +7,8 @@
   
   <script lang="ts">
   import { api } from 'src/boot/axios';
-import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
+  import { defineComponent } from 'vue';
+  import { useRouter } from 'vue-router';
   
   export default defineComponent({
     name: 'QuestionPage',

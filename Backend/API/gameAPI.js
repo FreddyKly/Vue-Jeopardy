@@ -7,6 +7,7 @@ const questionColumnModel = require("../Schemas/QuestionColumn")
 
 const router = express.Router();
 
+// Create a new Game
 router.post('/', async (req, res) => {
     console.log('Post-Request for a Game', req.body)
     const NUMBER_OF_TOPICS = 5
@@ -40,14 +41,21 @@ router.post('/', async (req, res) => {
     res.status(201).json({gameID: game._id})
 })
 
+// Get Game data
 router.get('/', async (req, res) => {
     console.log('Get-Request for Game')
-    const game = gameModel.where("_id").equals(req.body.gameID)
-    const q1 = await questionColumnModel.create({
-        topic: req.body.topic,
-        questions: req.body.questions
+    console.log(req.body.gameID)
+    const game = await gameModel.findById(req.body.gameID)
+    var categories = {};
+    for (let i = 0; i < game.questions.length; i++) {
+        topicObject = await questionColumnModel.findById(game.questions[i])
+        categories[topicObject.topic] = topicObject.questions
+    }
+    console.log(categories)
+    res.status(200).json({
+        gameID: game._id,
+        categories: categories
     })
-    game.questions.push(q1)
 })
 
 async function createUserIfNotExists(req) {

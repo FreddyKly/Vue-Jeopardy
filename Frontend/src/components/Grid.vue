@@ -29,7 +29,7 @@ import {
   defineComponent,
   PropType,
 } from 'vue';
-import { QuestionCard, Category } from './models';
+import { Category } from './models';
 
 export default defineComponent({
   name: 'QuestionGrid',
@@ -43,7 +43,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup() {
     return {  };
   },
 });

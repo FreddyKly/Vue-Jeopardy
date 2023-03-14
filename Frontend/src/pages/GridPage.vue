@@ -17,11 +17,13 @@
 import { QuestionCard, Category } from 'components/models';
 import QuestionsGrid from 'src/components/Grid.vue';
 import { defineComponent, ref } from 'vue';
+// import { api } from 'src/boot/axios';
 
 export default defineComponent({
   name: 'IndexPage',
   components: { QuestionsGrid },
   setup () {
+    // const res = api.get('/api/game')
     const categories = ref<Category[]>([
       {
         id: 1,
