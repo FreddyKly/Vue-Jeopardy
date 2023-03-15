@@ -8,7 +8,7 @@ const questionColumnModel = require("../Schemas/QuestionColumn")
 const router = express.Router();
 
 // Create a new Game
-router.post('/', async (req, res) => {
+router.post('/newGame', async (req, res) => {
     console.log('Post-Request for a Game', req.body)
     const NUMBER_OF_TOPICS = 5
     const NUMBER_OF_QUESTIONS = 5
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 })
 
 // Get Game data
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     console.log('Get-Request for Game')
     // Game-ID not valid
     if (!mongoose.Types.ObjectId.isValid(req.body.gameID)){

@@ -1,12 +1,14 @@
 <template>
+  {{ categories }}
   <div v-for="category in categories" :key=category.id class="column no-wrap">
     <div class="row my-font flex justify-center text-capitalized text-h4">
       <div style="height: 100px;" class="flex items-center text-center justify-center">
-        <q-input borderless type="textarea" autogrow v-model="category.title" :input-style="{ fontSize: '35px', width: '200px', lineHeight: '35px', textAlign:'center'}"/>
+        {{ category[0].gridID }}
+        <q-input borderless type="textarea" autogrow v-model="category.topic" :input-style="{ fontSize: '35px', width: '200px', lineHeight: '35px', textAlign:'center'}"/>
       </div>
       
     </div>
-    <div v-for="question in category.questions" :key="question.id" class="row no-wrap">
+    <div v-for="question in category.question" :key="question.id" class="row no-wrap">
         <q-card 
         class="bg-teal-3 q-ma-sm cursor-pointer" 
         v-bind:style="$q.screen.gt.md ? {'width' : '270px'} : {'width' : '200px'}"
@@ -28,23 +30,26 @@
 import {
   defineComponent,
   PropType,
+  ref
 } from 'vue';
 import { Category } from './models';
+import { useRoute } from 'vue-router';
+import { api } from 'src/boot/axios';
 
 export default defineComponent({
   name: 'QuestionGrid',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    categories: {
-      type: Array as PropType<Category[]>,
-      required: true
-    }
-  },
-  setup() {
-    return {  };
+  async setup() {
+    const route = useRoute()
+    const gameJson = JSON.stringify({ gameID: `${route.params.GridID}` });
+    const res = await api.post('/api/game', gameJson, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    var cat = <Category> {title: res.data.categories}
+    const categories = res.data.categories
+    console.log(cat)
+    return { categories };
   },
 });
 </script>

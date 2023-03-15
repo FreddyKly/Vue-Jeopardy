@@ -16,7 +16,7 @@
       const router = useRouter()
       async function newGame() {
         const userJson = JSON.stringify({ user: 'LinitGaws' });
-        const res = await api.post('/api/game', userJson, {
+        const res = await api.post('/api/game/newGame', userJson, {
           headers: {
             'Content-Type': 'application/json'
           }
