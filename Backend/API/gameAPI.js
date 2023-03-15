@@ -56,10 +56,10 @@ router.post('/', async (req, res) => {
         res.status(404).send('The game-ID you wanted to access did not correspond to a game in the database')
         return
     }
-    var categories = {};
+    var categories = [];
     for (let i = 0; i < game.questions.length; i++) {
         topicObject = await questionColumnModel.findById(game.questions[i])
-        categories[topicObject.topic] = topicObject.questions
+        categories.push(topicObject)
     }
     res.status(200).json({
         gameID: game._id,

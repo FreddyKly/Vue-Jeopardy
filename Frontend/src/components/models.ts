@@ -1,11 +1,11 @@
 export interface QuestionCard {
-  id: number;
+  gridID: number;
   points: number;
   question: string;
 }
 
 export interface Category {
   id: number;
-  title: string;
+  topic: string;
   questions: QuestionCard[];
 }
