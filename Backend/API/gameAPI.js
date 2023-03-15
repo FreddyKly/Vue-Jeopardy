@@ -69,7 +69,7 @@ router.post('/', async (req, res) => {
 
 // Change topic
 router.post('/topic', async (req, res) => {
-    console.log('Get-Request for Topic change')
+    console.log('Get-Request for Topic change', req.body)
     if (!mongoose.Types.ObjectId.isValid(req.body.gameID)){
         res.status(404).send('The game-ID you entered was not valid')
         return

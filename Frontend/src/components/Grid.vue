@@ -2,7 +2,7 @@
   <div v-for="(category, index) in cat" :key=category.id class="column no-wrap">
     <div class="row my-font flex justify-center text-capitalized text-h4">
       <div style="height: 100px;" class="flex items-center text-center justify-center">
-        <q-input borderless type="textarea" v-on:blur="topicChanged(topics[index])" autogrow v-model.trim="topics[index]" :input-style="{ fontSize: '35px', width: '200px', lineHeight: '35px', textAlign:'center'}"/>
+        <q-input borderless type="textarea" v-on:blur="topicChanged()" autogrow v-model.trim="topics[index]" :input-style="{ fontSize: '35px', width: '200px', lineHeight: '35px', textAlign:'center'}"/>
       </div>
     </div>
     <div v-for="question in category.questions" :key="question.gridID" class="row no-wrap">
@@ -37,15 +37,15 @@ export default defineComponent({
   async setup() {
     const route = useRoute()
     const gameJson = JSON.stringify({ gameID: `${route.params.GameID}` });
-    const res = await api.post('/api/game', gameJson, {
+    const resGame = await api.post('/api/game', gameJson, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
 
     var cat = ref<Category[]>()
-    cat.value = res.data.categories
-    const helper = res.data.categories 
+    cat.value = resGame.data.categories
+    const helper = resGame.data.categories 
     var topics = ref<string[]>(
       Object.keys(helper).map(
         function(key){
@@ -54,8 +54,16 @@ export default defineComponent({
     console.log(topics)
 
 
-    function topicChanged(topic: string){
-      console.log(topic)
+    async function topicChanged(){
+      const topicJson = JSON.stringify({ 
+        gameID: `${route.params.GameID}`,
+        categories: topics.value
+      });
+      const resTopic = await api.post('/api/game/topic', topicJson, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     }
     // // eslint-disable-next-line vue/no-watch-after-await
     // watchEffect(() => {
