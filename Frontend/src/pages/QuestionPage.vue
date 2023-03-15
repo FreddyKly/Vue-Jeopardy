@@ -1,11 +1,16 @@
 <template>
     <q-page class="row my-font bg-teal-3 border">
-      <Question :question="title"></Question>
+      <suspense>
+        <template #fallback>
+          Loading...
+        </template>
+      
+        <Question></Question>
+      </suspense>
     </q-page>
   </template>
   
   <script lang="ts">
-  import { QuestionCard } from 'components/models';
   import Question from 'src/components/Question.vue';
   import { defineComponent } from 'vue';
   
@@ -13,8 +18,7 @@
     name: 'QuestionPage',
     components: {Question},
     setup () {
-        const title = 'Best Ninja in Konoha'
-      return { title };
+      return { };
     }
   });
   </script>

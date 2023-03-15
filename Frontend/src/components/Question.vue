@@ -1,25 +1,26 @@
 <template>
     <div class="text-black text-h3">
-        {{ question }}
+      hey
     </div>
   </template>
   
   <script lang="ts">
   import {
-    defineComponent,
-    PropType,
+    defineComponent
   } from 'vue';
-  import { QuestionCard } from './models';
+  import { useRoute } from 'vue-router';
+  import { api } from 'src/boot/axios';
   
   export default defineComponent({
     name: 'QuestionGrid',
-    props: {
-      question: {
-        type: String,
-        required: true
-      }
-    },
-    setup(props) {
+    async setup() {
+      const route = useRoute()
+      const gameJson = JSON.stringify({ gameID: `${route.params.GameID}` });
+      const resGame = await api.post('/api/game', gameJson, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       return {  };
     },
   });
