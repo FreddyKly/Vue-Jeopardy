@@ -21,11 +21,11 @@ app.use(express.json({limit: "10mb", extended: true}))
 app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
 
 const user = require('./API/userAPI');
-const questions = require('./API/questionColumnAPI');
+const categories = require('./API/categoryAPI');
 const game = require('./API/gameAPI');
 
 app.use('/api/user', user);
-app.use('/api/questions', questions);
+app.use('/api/categories', categories);
 app.use('/api/game', game);
 
 // set port, listen for requests

@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 
 const gameModel = require("../Schemas/Game")
 const userModel = require("../Schemas/User")
-const questionColumnModel = require("../Schemas/QuestionColumn")
+const questionColumnModel = require("../Schemas/Category")
 
 const router = express.Router();
 

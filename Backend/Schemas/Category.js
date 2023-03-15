@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const questionColumnSchema = new mongoose.Schema({
+const CategorySchema = new mongoose.Schema({
     topic: {
         type: String,
         minLength: 1,
@@ -25,4 +25,4 @@ const questionColumnSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("QuestionColumn", questionColumnSchema)
+module.exports = mongoose.model("Category", CategorySchema)

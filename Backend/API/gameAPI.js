@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 
 const gameModel = require("../Schemas/Game")
 const userModel = require("../Schemas/User")
-const questionColumnModel = require("../Schemas/QuestionColumn")
+const categoryModel = require("../Schemas/Category")
 
 const router = express.Router();
 
@@ -15,28 +15,28 @@ router.post('/newGame', async (req, res) => {
     const EXAMPLE_TOPICS = ["Anime", "Best Songs", "Landmarks", "LoL", "Films"]
     
     const user = await createUserIfNotExists(req)
-    var questionColumnsIDs = []
+    var categorysIDs = []
 
     for (let topicIndex = 0; topicIndex < NUMBER_OF_TOPICS; topicIndex++) {
-        var questionColumn = new questionColumnModel ({
+        var category = new categoryModel ({
             topic: EXAMPLE_TOPICS[topicIndex]
         })
         for (let questionIndex = 0; questionIndex < NUMBER_OF_QUESTIONS; questionIndex++) {
-            questionColumn.questions.push({
+            category.questions.push({
                 question: "", 
                 gridID: topicIndex * 5 + questionIndex})
         }
 
-        await questionColumn.save()
-            .then(savedQuestionColumn => {
-                questionColumnsIDs.push(savedQuestionColumn._id)
+        await category.save()
+            .then(savedCategory => {
+                categorysIDs.push(savedCategory._id)
             })
             .catch(err => handleError(err))
     }
-    console.log(questionColumnsIDs)
+    console.log(categorysIDs)
     const game = await gameModel.create({
         creator: user,
-        questions: questionColumnsIDs
+        categories: categorysIDs
     })
     res.status(201).json({gameID: game._id})
 })
@@ -57,14 +57,35 @@ router.post('/', async (req, res) => {
         return
     }
     var categories = [];
-    for (let i = 0; i < game.questions.length; i++) {
-        topicObject = await questionColumnModel.findById(game.questions[i])
+    for (let i = 0; i < game.categories.length; i++) {
+        topicObject = await categoryModel.findById(game.categories[i])
         categories.push(topicObject)
     }
     res.status(200).json({
         gameID: game._id,
         categories: categories
     })
+})
+
+// Change topic
+router.post('/topic', async (req, res) => {
+    console.log('Get-Request for Topic change')
+    if (!mongoose.Types.ObjectId.isValid(req.body.gameID)){
+        res.status(404).send('The game-ID you entered was not valid')
+        return
+    }
+    console.log(req.body.gameID)
+    const game = await gameModel.findById(req.body.gameID).populate('categories')
+    // Game-ID not found
+    if (game === null) {
+        res.status(404).send('The game-ID you wanted to access did not correspond to a game in the database')
+        return
+    }
+    for(let i = 0; i < game.categories.length; i++) {
+        game.categories[i].topic = req.body.categories[i]
+        game.categories[i].save()
+    }
+    res.status(201).send()
 })
 
 async function createUserIfNotExists(req) {
