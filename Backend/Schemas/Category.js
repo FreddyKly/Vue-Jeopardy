@@ -8,7 +8,8 @@ const CategorySchema = new mongoose.Schema({
     },
     questions: [{
         question: String,
-        gridID: Number
+        gridID: Number,
+        edited: {type: Boolean, default: false}
     }],
     answeres: {
         type: [String]

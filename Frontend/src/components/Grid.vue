@@ -7,7 +7,7 @@
     </div>
     <div v-for="question in category.questions" :key="question.gridID" class="row no-wrap">
         <q-card 
-        class="bg-teal-3 q-ma-sm cursor-pointer" 
+        v-bind:class="question.edited ? 'bg-teal-3 q-ma-sm cursor-pointer' : 'bg-grey q-ma-sm cursor-pointer'" 
         v-bind:style="$q.screen.gt.md ? {'width' : '270px'} : {'width' : '200px'}"
         v-on:click="$router.push({path: `/${$route.params.GameID}/${question.gridID}`, replace: false})">
           <q-card-section>
