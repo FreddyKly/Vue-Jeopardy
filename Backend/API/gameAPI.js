@@ -23,7 +23,7 @@ router.post('/newGame', async (req, res) => {
         })
         for (let questionIndex = 0; questionIndex < NUMBER_OF_QUESTIONS; questionIndex++) {
             category.questions.push({
-                question: "", 
+                question: "Write a question", 
                 gridID: topicIndex * 5 + questionIndex})
         }
 
@@ -88,6 +88,18 @@ router.post('/topic', async (req, res) => {
     res.status(201).send()
 })
 
+// Change Question
+router.post('/question', async (req, res) => {
+    console.log('Get-Request for Topic change', req.body)
+    const game = await checkGameID(req.body.gameID, res)
+    if ( game === null ) { return }
+    const column = Math.trunc(Number(req.body.questionID) / 5)
+    game.categories[column].questions[(req.body.questionID % 5)].question = req.body.question
+    game.categories[column].questions[(req.body.questionID % 5)].edited = req.body.edited
+    game.categories[column].save()
+    res.status(201).send(game)
+})
+
 async function createUserIfNotExists(req) {
     let foundUser = await userModel.findOne({ name: req.body.user })
     if (foundUser) {
@@ -96,6 +108,21 @@ async function createUserIfNotExists(req) {
         return await userModel.create({name: req.body.user})
     }
     
+}
+
+async function checkGameID (gameID, res) {
+    if (!mongoose.Types.ObjectId.isValid(gameID)){
+        res.status(404).send('The game-ID you entered was not valid')
+        return null
+    }
+    console.log(gameID)
+    const game = await gameModel.findById(gameID).populate('categories')
+    // Game-ID not found
+    if (game === null) {
+        res.status(404).send('The game-ID you wanted to access did not correspond to a game in the database')
+        return null
+    }
+    return game
 }
 
 module.exports = router;
