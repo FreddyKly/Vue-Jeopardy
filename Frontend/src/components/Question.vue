@@ -25,7 +25,7 @@ import { api } from 'src/boot/axios';
 export default defineComponent({
   name: 'QuestionComponent',
   async setup() {
-    var question = ref<string>('Write a question')
+    var question = ref<string>()
     const route = useRoute()
     const gameJson = JSON.stringify({ gameID: `${route.params.GameID}` });
     const resGame = await api.post('/api/game', gameJson, {
@@ -33,20 +33,24 @@ export default defineComponent({
         'Content-Type': 'application/json'
       }
     })
+     
     const column = Math.trunc(Number(route.params.Qid) / 5)
-    console.log(column)
+    console.log(resGame.data.categories[column].questions[Number(route.params.Qid)])
     const topic = resGame.data.categories[column].topic
+    question.value = resGame.data.categories[column].questions[(Number(route.params.Qid) % 5)].question
 
     async function questionChanged() {
-      //   const topicJson = JSON.stringify({ 
-      //     gameID: `${route.params.GameID}`,
-      //     categories: topics.value
-      //   });
-      //   const resTopic = await api.post('/api/game/topic', topicJson, {
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   }
-      // })
+        const questionJson = JSON.stringify({ 
+          gameID: `${route.params.GameID}`,
+          questionID: route.params.Qid,
+          question: question.value,
+          edited: true
+        });
+        const resTopic = await api.post('/api/game/question', questionJson, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
     }
     return { topic, question, questionChanged };
   },
