@@ -67,7 +67,7 @@ module.exports = configure(function (ctx) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: '/',
       // analyze: true,
       env: {
         API: ctx.dev ? 'http://localhost:8080' : 'prod.api'
