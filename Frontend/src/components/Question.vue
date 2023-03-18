@@ -1,9 +1,9 @@
 <template>
-  <div class="text-black text-h3" id="topic">
+  <div class="text-black text-h3 q-ml-md" id="topic">
     {{ topic }}
     <p class="q-pl-lg text-h6 ">{{ ((Number($route.params.Qid) + 1) % 5) * 100 }}</p>
   </div>
-  <div v-if="isEdited" class="col q-ma-lg flex justify-end items-start">
+  <div v-if="isEdited" class="col q-ma-lg flex justify-end items-start" id="editBtn">
     <q-btn color="teal-5" icon="edit" v-on:click="isEdited = false">
     </q-btn>
   </div>
@@ -75,5 +75,8 @@ export default defineComponent({
 /* -3 to compensate the h3 header of the topic and true center the items beneath */
 #topic {
   margin-bottom: -3rem
+}
+#editBtn {
+  margin-bottom: -5rem
 }
 </style>
