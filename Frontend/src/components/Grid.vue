@@ -2,7 +2,7 @@
   <div v-for="(category, index) in cat" :key=category.id class="column no-wrap">
     <div class="row my-font flex justify-center text-capitalized text-h4">
       <div style="height: 100px;" class="flex items-center text-center justify-center">
-        <q-input borderless type="textarea" v-on:blur="topicChanged()" autogrow v-model.trim="topics[index]" :input-style="{ fontSize: '30px', width: '200px', lineHeight: '30px', textAlign:'center'}"/>
+        <q-input borderless type="textarea" v-on:blur="topicChanged()" autogrow v-model.trim="topics[index]" v-bind:input-style="$q.screen.gt.md ? { fontSize: '30px', width: '270px', lineHeight: '30px', textAlign:'center'} : { fontSize: '30px', width: '200px', lineHeight: '30px', textAlign:'center'}"/>
       </div>
     </div>
     <div v-for="question in category.questions" :key="question.gridID" class="row no-wrap">
