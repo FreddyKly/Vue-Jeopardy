@@ -20,7 +20,7 @@
   </div>
 
   <q-page-sticky position="bottom-left" :offset="[18, 18]">
-    <q-btn fab icon="arrow_back" color="teal-5" v-on:click="$router.push({ path: `/${$route.params.GameID}` })" />
+    <q-btn fab icon="arrow_back_ios" color="teal-5" v-on:click="$router.push({ path: `/${$route.params.GameID}` })" />
   </q-page-sticky>
 </template>
   
