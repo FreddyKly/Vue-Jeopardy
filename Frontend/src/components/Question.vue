@@ -1,7 +1,7 @@
 <template>
   <div class="text-black text-h3 q-ml-md" id="topic">
     {{ topic }}
-    <p class="q-pl-lg text-h6 ">{{ ((Number($route.params.Qid) + 1) % 5) * 100 }}</p>
+    <p class="q-pl-lg text-h6 ">{{ ((Number($route.params.Qid) % 5) + 1) * 100 }}</p>
   </div>
   <div v-if="isEdited" class="col q-ma-lg flex justify-end items-start" id="editBtn">
     <q-btn color="teal-5" icon="edit" v-on:click="isEdited = false">
